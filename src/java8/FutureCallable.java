@@ -19,9 +19,9 @@ public class FutureCallable {
 class Task implements Callable<Test>{
 
 	public Test call() throws Exception {
-		throw new Exception();
-//		Thread.sleep(30000);
-//		return new Test(0);
+		//throw new Exception();
+		Thread.sleep(30000);
+		return new Test(0);
 	}
 	
 }
