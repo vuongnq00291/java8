@@ -16,7 +16,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.time.temporal.ChronoUnit;
 
-public class DateTime {
+public class V8DateTime {
   public static void main(String arg[]){
 	  timeZone();
   }

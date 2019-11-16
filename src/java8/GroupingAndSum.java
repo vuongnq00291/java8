@@ -1,20 +1,23 @@
 package java8;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
-public class GroupingBy {
+public class GroupingAndSum {
 	public static void main(String[] args) {
 
-        File file = new File("/Users/thaitran/Downloads/ontime/flights.csv");
-        try {
-            BufferedReader br = new BufferedReader(new FileReader(file));
-            Map<String, Integer> listMaps = br.lines().parallel().map(mapToItem).collect(Collectors.groupingBy(Item::getId, Collectors.summingInt(Item::getPrice)));
-            listMaps.forEach((key, value) -> System.out.println(key + " : " + value));
+        String file = "/Users/ashok/git/java8/flight.csv";
+        try (Stream<String> stream = Files.lines(Paths.get(file))) {
+            Map<String, Integer> listMaps = 
+            		 stream
+            		.parallel()
+            		.map(mapToItem)
+            		.collect(Collectors.groupingBy(Item::getId, Collectors.summingInt(Item::getPrice)));
+                     listMaps.forEach((key, value) -> System.out.println(key + " : " + value));
         } catch (Exception e) {
 
         }
@@ -22,9 +25,7 @@ public class GroupingBy {
     }
 	 private static Function<String, Item> mapToItem = (line) -> {
 	        String[] p = line.split(",");
-
-	        Item item = new Item(p[0], Integer.parseInt(p[7]));
-
+	        Item item = new Item(p[0], Integer.parseInt(p[1]));
 	        return item;
 	    };
 	}

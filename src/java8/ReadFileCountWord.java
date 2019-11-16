@@ -10,7 +10,7 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class ReadingFile {
+public class ReadFileCountWord {
 	
 	
 	public static void main(String arg[]){
@@ -19,13 +19,13 @@ public class ReadingFile {
 		
 			try (Stream<String> stream = Files.lines(Paths.get(fileName))) {
 				
-			 Map<String,Long> map= 	stream
+			 Map<String,Integer> map= 	stream
 				 .filter(line->!line.startsWith("#"))
 			     .flatMap(line -> Stream.of(line.split("\\s+")))
 			     .map(String::toLowerCase)
-			     //.collect(Collectors.toMap(Function.identity(), word -> 1, Integer::sum))
+			     .collect(Collectors.toMap(Function.identity(), s -> 1, Integer::sum));
 			      // s ->s = Function.identity();
-			     .collect(Collectors.groupingBy(s ->s,Collectors.counting()));		
+			     //.collect(Collectors.groupingBy(s ->s,Collectors.counting()));		
 			 
 			      map
 			     .entrySet()
