@@ -3,6 +3,7 @@ package java8;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class FindMinMax {
 	public static void main(String[] args) {
@@ -14,6 +15,10 @@ public class FindMinMax {
 		.max().orElse(0);
 		System.out.println(max);
 		
+		
+		
+		
+		
 		Person alex = new Person("Alex", 23);
 	    Person john = new Person("John", 40);
 	    Person peter = new Person("Peter", 32);
@@ -21,7 +26,15 @@ public class FindMinMax {
 	    Person result = people
 	    		        .stream()
 	    		        .max(Comparator.comparing(Person::getAge)).orElse(new Person());
-	    System.out.print(result.getName());
+	    System.out.println(result.getName());
+	    
+	    
+	    people = Arrays.asList(alex, john, peter);
+	    result =         people
+	    		        .stream()
+	    		        .collect(Collectors.maxBy(Comparator.comparing(Person::getAge))).orElse(new Person("no",0));
+	    		        
+	    System.out.println(result.getName());
 	    		        
 	}
 }

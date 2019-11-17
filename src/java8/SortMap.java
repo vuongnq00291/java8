@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public class SortMap {
@@ -25,7 +26,14 @@ public class SortMap {
                              (oldValue, newValue) -> oldValue,       // if same key, take the old key
                              ()-> new LinkedHashMap<>() //  LinkedHashMap::new                    // returns a LinkedHashMap, keep order
                      ));
+     
 
      System.out.println("Result 1 : " + result1);
+     Map result2 = list.stream()
+             .sorted(Comparator.comparing(Hosting::getWebsites).reversed())
+             .collect(Collectors.groupingBy(s->s,LinkedHashMap::new,Collectors.maxBy(Comparator.comparing(Hosting::getWebsites))));
+     
+     System.out.println("Result 1 : " + result1);
+     
  }
 }

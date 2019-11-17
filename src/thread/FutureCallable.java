@@ -11,7 +11,8 @@ public class FutureCallable {
 	public static void main(String arg[]) throws Exception, ExecutionException{
 		 ExecutorService executor = Executors.newFixedThreadPool(10);
 		 Future<Test> fu =executor.submit(new Task());
-		 System.out.println(fu.get().toString());
+		 System.out.println(" ...");
+		 System.out.println(fu.get());
 		 
 	}
 	
@@ -19,9 +20,9 @@ public class FutureCallable {
 class Task implements Callable<Test>{
 
 	public Test call() throws Exception {
-		throw new Exception();
-		//Thread.sleep(30000);
-		//return new Test(0);
+		//throw new Exception();
+		Thread.sleep(5000);
+		return new Test(0);
 	}
 	
 }

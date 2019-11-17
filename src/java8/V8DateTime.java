@@ -14,6 +14,7 @@ import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.time.temporal.ChronoField;
 import java.time.temporal.ChronoUnit;
 
 public class V8DateTime {
@@ -121,13 +122,18 @@ public class V8DateTime {
   }
   
   public static void timeZone(){
-	  ZoneId america = ZoneId.of("Asia/vietnam");
-	  LocalDateTime localtDateAndTime = LocalDateTime.now();
-	  ZonedDateTime dateAndTimeInNewYork  = ZonedDateTime.of(localtDateAndTime, america );
-	  System.out.println("Current date and time in a particular timezone : " + dateAndTimeInNewYork);
-	  
-	  
+	  ZoneId america = ZoneId.of("Asia/Bangkok");
+	  Instant instant = Instant.now();
 	  DateTimeFormatter format = DateTimeFormatter.ofPattern("HHmm, dd MMM yyyy");
+	  LocalDateTime localtDateAndTime = LocalDateTime.now();
+	  ZonedDateTime dateAndTimeInNewYork  = ZonedDateTime.of(localtDateAndTime, america);
+	  System.out.println("Current date and time in a particular timezone : " + format.format(dateAndTimeInNewYork));
+	  
+	  dateAndTimeInNewYork  = ZonedDateTime.ofInstant(instant, america);
+	  System.out.println("Current date and time in a particular timezone : " + format.format(dateAndTimeInNewYork));
+	  
+	  
+	  
 
       LocalDateTime ldt = LocalDateTime.of(2016, Month.AUGUST, 22, 14, 30);
       System.out.println("LocalDateTime : " + format.format(ldt));
@@ -137,7 +143,7 @@ public class V8DateTime {
       System.out.println("Depart : " + format.format(klDateTime));
 
       //UTC+9 and flight duration = 7 hours
-      ZonedDateTime japanDateTime = klDateTime.withZoneSameInstant(ZoneId.of("Asia/Tokyo")).plusHours(7);
+      ZonedDateTime japanDateTime = klDateTime.withZoneSameInstant(ZoneId.of("Asia/Tokyo")).plusHours(2);
       System.out.println("Arrive : " + format.format(japanDateTime));
 
       System.out.println("\n---Detail---");
@@ -147,7 +153,7 @@ public class V8DateTime {
       
       
    // Z = UTC+0
-      Instant instant = Instant.now();
+     
       System.out.println("Instant : " + instant);
       // Japan = UTC+9
       ZonedDateTime jpTime = instant.atZone(ZoneId.of("Asia/Tokyo"));
